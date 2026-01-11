@@ -1,0 +1,7 @@
+{
+  "name": "mente-clara",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
