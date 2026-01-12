@@ -1,0 +1,78 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Mi perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="ion-padding">
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+
+  <ion-card class="card">
+    <ion-card-header>
+      <ion-card-title>Bienvenido/a 🌿</ion-card-title>
+      <ion-card-subtitle>
+        Sesión activa: <strong>{{ email || '—' }}</strong>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="ion-margin-top">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          <strong>Progreso:</strong>
+          <span>
+            {{ completed }} / {{ total }} sesiones completadas
+          </span>
+        </div>
+
+        <ion-progress-bar
+          class="ion-margin-top"
+          [value]="total > 0 ? (completed / total) : 0"
+        ></ion-progress-bar>
+
+        <div style="display:flex; justify-content:flex-end; margin-top:6px;">
+          <small>{{ percent }}%</small>
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="ion-margin-top"
+        routerLink="/sesiones"
+        [disabled]="loading"
+      >
+        🧘 SESIONES GUIADAS
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="ion-margin-top"
+        routerLink="/foro"
+        [disabled]="loading"
+      >
+        💬 FORO ANÓNIMO
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="ion-margin-top"
+        routerLink="/teleconsultas"
+        [disabled]="loading"
+      >
+        🧑‍⚕️ TELECONSULTAS
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="danger"
+        class="ion-margin-top"
+        (click)="logout()"
+        [disabled]="loading"
+      >
+        CERRAR SESIÓN
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service'; // ajusta si tu ruta es distinta
 
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
+  standalone: true,
+  imports: [CommonModule, IonicModule],
+  templateUrl: './tab1.page.html',
 })
 export class Tab1Page {
-  constructor() {}
+  userEmail: string | null = null;
+
+  constructor(private auth: AuthService, private router: Router) {
+    this.auth.user$.subscribe(u => (this.userEmail = u?.email ?? null));
+  }
+
+  async logout() {
+    await this.auth.logout();
+    await this.router.navigateByUrl('/home', { replaceUrl: true });
+  }
 }

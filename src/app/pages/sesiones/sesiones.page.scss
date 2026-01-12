@@ -1,0 +1,13 @@
+.wrap { padding-top: 10px; }
+.header-card { border-radius: 18px; overflow: hidden; }
+.meta { opacity: 0.7; font-size: 12px; }
+
+ion-item.completed {
+  --background: rgba(40, 180, 99, 0.12);
+}
+
+.check {
+  color: var(--ion-color-success);
+  margin-left: 6px;
+  vertical-align: middle;
+}

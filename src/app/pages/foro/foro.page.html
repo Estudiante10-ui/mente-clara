@@ -1,0 +1,62 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Foro anónimo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="wrap ion-padding">
+
+    <ion-card class="header-card">
+      <ion-card-header>
+        <ion-card-title>Comparte cómo te sientes 💬</ion-card-title>
+        <ion-card-subtitle>
+          Publicaciones anónimas (se guarda la sesión, pero no se muestra tu identidad).
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-textarea
+          [(ngModel)]="message"
+          placeholder="Escribe tu mensaje…"
+          autoGrow="true"
+        ></ion-textarea>
+
+        <ion-button
+          expand="block"
+          class="ion-margin-top"
+          [disabled]="posting"
+          (click)="publish()"
+        >
+          <ion-spinner *ngIf="posting" name="crescent" class="ion-margin-end"></ion-spinner>
+          {{ posting ? 'Publicando...' : 'Publicar' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-refresher slot="fixed" (ionRefresh)="load($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+
+    <ion-card *ngIf="!loading && posts.length === 0">
+      <ion-card-content>
+        Aún no hay publicaciones. Sé la primera persona en escribir 🌿
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="post" *ngFor="let p of posts">
+      <ion-card-header>
+        <ion-card-subtitle>{{ formatDate(p.createdAt) }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ p.message }}
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

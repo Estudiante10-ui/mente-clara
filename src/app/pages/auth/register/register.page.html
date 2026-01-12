@@ -1,0 +1,44 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="auth-wrap ion-padding">
+    <ion-card class="auth-card">
+      <ion-card-header>
+        <ion-card-title>Crea tu cuenta</ion-card-title>
+        <ion-card-subtitle>Empieza tu experiencia en Mente Clara</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="full">
+          <ion-label position="stacked">Correo</ion-label>
+          <ion-input [(ngModel)]="email" type="email" placeholder="tu@correo.com"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input [(ngModel)]="password" type="password" placeholder="mínimo 6 caracteres"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="doRegister()" [disabled]="loading">
+          <ion-spinner *ngIf="loading" name="crescent" class="ion-margin-end"></ion-spinner>
+          {{ loading ? 'Creando...' : 'Crear cuenta' }}
+        </ion-button>
+
+        <ion-button expand="block" fill="clear" routerLink="/auth/login">
+          Volver a ingresar
+        </ion-button>
+
+        <ion-text class="hint">
+          <p>Tu contraseña debe tener al menos 6 caracteres.</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

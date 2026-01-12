@@ -1,0 +1,45 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sesiones guiadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="wrap ion-padding">
+    <ion-card class="header-card">
+      <ion-card-header>
+        <ion-card-title>Elige una sesión 🌿</ion-card-title>
+        <ion-card-subtitle>Respiración, relajación, mindfulness y sueño</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+
+    <ion-list *ngIf="!loading">
+      <ion-item
+  *ngFor="let s of sessions"
+  button="true"
+  detail="true"
+  [routerLink]="['/sesiones', s.id]"
+  [class.completed]="completed.has(s.id)"
+>
+  <ion-label>
+    <h2>
+      {{ s.title }}
+      <ion-icon
+        *ngIf="completed.has(s.id)"
+        name="checkmark-circle-outline"
+        class="check"
+      ></ion-icon>
+    </h2>
+    <p>{{ s.subtitle }}</p>
+    <p class="meta">{{ s.category }} · {{ s.level }} · {{ s.minutes }} min</p>
+  </ion-label>
+</ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>

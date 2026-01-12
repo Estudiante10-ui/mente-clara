@@ -1,17 +1,17 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <p *ngIf="userEmail; else noUser">Sesión activa: <b>{{ userEmail }}</b></p>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ng-template #noUser>
+    <p>No hay sesión activa</p>
+  </ng-template>
+
+  <ion-button expand="block" color="danger" (click)="logout()">
+    Cerrar sesión
+  </ion-button>
 </ion-content>

@@ -1,0 +1,86 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Teleconsultas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-refresher slot="fixed" (ionRefresh)="load($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="wrap ion-padding">
+
+    <ion-card class="card">
+      <ion-card-header>
+        <ion-card-title>Agendar teleconsulta 🧑‍⚕️</ion-card-title>
+        <ion-card-subtitle>Quedará como “pendiente” hasta confirmación.</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Fecha</ion-label>
+          <ion-input [(ngModel)]="date" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Hora</ion-label>
+          <ion-input [(ngModel)]="time" type="time"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Modalidad</ion-label>
+          <ion-select [(ngModel)]="mode">
+            <ion-select-option value="video">Video</ion-select-option>
+            <ion-select-option value="llamada">Llamada</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Motivo</ion-label>
+          <ion-input [(ngModel)]="reason" placeholder="Ej: Estrés académico"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Observaciones (opcional)</ion-label>
+          <ion-textarea [(ngModel)]="notes" autoGrow="true"></ion-textarea>
+        </ion-item>
+
+        <ion-button expand="block" class="ion-margin-top" [disabled]="saving" (click)="submit()">
+          <ion-spinner *ngIf="saving" name="crescent" class="ion-margin-end"></ion-spinner>
+          {{ saving ? 'Agendando...' : 'Agendar' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+
+    <ion-card *ngIf="!loading && items.length === 0">
+      <ion-card-content>
+        Aún no tienes agendamientos. Crea uno arriba ✅
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list *ngIf="!loading && items.length > 0">
+      <ion-item
+        *ngFor="let a of items"
+        button="true"
+        detail="true"
+        [routerLink]="['/teleconsultas', a.id]"
+      >
+        <ion-label>
+          <h2>{{ a.date }} · {{ a.time }} ({{ a.mode }})</h2>
+          <p>{{ a.reason }}</p>
+        </ion-label>
+
+        <ion-badge [color]="badgeColor(a.status)">
+          {{ badgeText(a.status) }}
+        </ion-badge>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

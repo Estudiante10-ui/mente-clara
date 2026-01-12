@@ -1,0 +1,62 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Mente Clara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="hero ion-padding">
+    <div class="brand">
+      <div class="logo">🧠</div>
+      <div>
+        <h1>Mente Clara</h1>
+        <p>Tu espacio de bienestar: teleconsultas, sesiones guiadas y foro anónimo.</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <ion-button expand="block" size="large" (click)="goLogin()">
+        Ingresar
+      </ion-button>
+      <ion-button expand="block" size="large" fill="outline" (click)="goRegister()">
+        Crear cuenta
+      </ion-button>
+    </div>
+
+    <p class="footnote">
+      *Proyecto académico — Tus datos se gestionan con seguridad.
+    </p>
+  </div>
+
+  <div class="features ion-padding">
+    <ion-card class="feature">
+      <ion-card-header>
+        <ion-card-title>Sesiones guiadas</ion-card-title>
+        <ion-card-subtitle>Respiración, relajación y enfoque</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        Ejercicios cortos para reducir estrés y mejorar tu estado de ánimo.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="feature">
+      <ion-card-header>
+        <ion-card-title>Foro anónimo</ion-card-title>
+        <ion-card-subtitle>Acompañamiento y comunidad</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        Comparte experiencias de forma segura, con moderación básica.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="feature">
+      <ion-card-header>
+        <ion-card-title>Teleconsultas</ion-card-title>
+        <ion-card-subtitle>Orientación profesional</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        Agenda y realiza sesiones online con apoyo especializado.
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
